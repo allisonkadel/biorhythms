@@ -21,8 +21,8 @@ post '/login' do
 end
 
 get '/dashboard/:slug' do
-  @user = User.find_by(:username => params[:username])
-  slug = @user.to_slug
+  @user = User.find_by_slug(params[:slug])
+  binding.pry
   erb :'/users/dashboard'
 end
 
