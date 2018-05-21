@@ -9,8 +9,8 @@ get '/login' do
 end
 
 post '/signup' do
-
-  binding.pry
+  @user = User.create_by(params)
+  session[:user_id] = @user.id
 end
 
 end
