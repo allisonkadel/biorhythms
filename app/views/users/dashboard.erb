@@ -1,3 +1,5 @@
-<%= @user.entries =>
+<% @user.entries.each do |entry| %>
+   <h4><%= entry.content %></h4>
+<% end %>
 
 listing the user entries
