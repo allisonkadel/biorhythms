@@ -1,14 +1,20 @@
 <h3>Create New Entry</h3>
 
 <form action="/entries/new" method="post">
-  <label>How's your physical state?</label>
+  <label>How's your physical state in words?</label>
   <input type="text" name="content_physical">
+  <label>How about in a number from 1-10?</label>
+  <input type="integer" name="rating_physical">
   <br><br>
   <label>How's your emotional state?</label>
   <input type="text" name="content_emotional">
+  <label>1-10?</label>
+  <input type="integer" name="rating_emotional">
   <br><br>
   <label>How's your intellectual state?</label>
   <input type="text" name="content_intellectual">
+  <label>1-10?</label>
+  <input type="integer" name="rating_intellectual">
   <br><br>
   <input type="submit" value="Create Entry">
 </form>
