@@ -8,4 +8,9 @@ get '/login' do
   erb :'users/login'
 end
 
+post '/signup' do
+
+  binding.pry
+end
+
 end
