@@ -5,7 +5,7 @@ get '/entries/new' do
 end
 
 post '/entries/new' do
-  binding.pry
+  current_user.entries.build(params).save
 end
 
 end
