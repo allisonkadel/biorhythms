@@ -4,5 +4,6 @@ class CreateEntriesTable < ActiveRecord::Migration[5.2]
       t.string :content
       t.integer :user_id
       t.timestamps
+    end
   end
 end

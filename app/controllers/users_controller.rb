@@ -11,6 +11,7 @@ end
 post '/signup' do
   @user = User.create_by(params)
   session[:user_id] = @user.id
+  binding.pry
 end
 
 end
