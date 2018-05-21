@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_150204) do
+ActiveRecord::Schema.define(version: 2018_05_21_210029) do
 
   create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "content_physical"
     t.integer "rating_physical"
     t.string "content_emotional"
     t.integer "rating_emotional"
     t.string "content_intellectual"
     t.integer "rating_intellectual"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

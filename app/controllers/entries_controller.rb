@@ -1,6 +1,5 @@
 class EntriesController < ApplicationController
 
-
   get '/entries/new' do
     erb :'/entries/new'
   end
@@ -15,14 +14,12 @@ class EntriesController < ApplicationController
     erb :'/entries/entries'
   end
 
-get '/entries/new' do
-  erb :'/entries/new'
-end
+  get '/entries/:id/delete' do
+    "deleting entry"
+  end
 
-post '/entries' do
-  current_user.entries.build(params).save
-  binding.pry
-end
-
+  get '/entries/:id/edit' do
+    "editing entry"
+  end
 
 end
