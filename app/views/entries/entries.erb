@@ -1,0 +1,9 @@
+here are your entries, friend!
+
+
+<% @entries.each do |entry| %>
+  <div> <h4> <%=entry.timestamp%> </h4> <%= "Physical: #{entry.rating_physical} - #{entry.content_physical}\n
+            Emotional: #{entry.rating_emotional} - #{entry.content_emotional}\n
+            Intellectual: #{entry.rating_intellectual} - #{entry.content_intellectual}\n" %>
+  </div>
+  <% end %>
