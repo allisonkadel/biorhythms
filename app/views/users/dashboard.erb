@@ -2,4 +2,6 @@
    <h4><%= entry.content %></h4>
 <% end %>
 
-listing the user entries
+<% if !@user.entries %>
+  <%= You have no existing entries. %>
+<% end %>
