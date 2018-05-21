@@ -17,7 +17,13 @@ end
 post '/login' do
   @user = User.find_by(:username => params[:username])
   session[:user_id] = @user.id
-  binding.pry
+
+end
+
+get '/dashboard/:slug' do
+  @user = User.find_by(:username => params[:username])
+  slug = @user.to_slug
+  erb :'/users/dashboard'
 end
 
 end
