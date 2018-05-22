@@ -5,7 +5,15 @@
   <div> <h4> <%=entry.created_at%> </h4> <%= "Physical: #{entry.rating_physical} - #{entry.content_physical}
             Emotional: #{entry.rating_emotional} - #{entry.content_emotional}
             Intellectual: #{entry.rating_intellectual} - #{entry.content_intellectual}" %>
-  </div>
-  <!--<a href="/entries/<%=#{entry.id}%>/delete">Delete</a>
-  <a href="/entries/<%=#{entry.id}%>/edit">Edit</a> -->
+
+  <form action="/entries/<%=#{entry.id}%>/edit" method="get">
+    <input type="submit" value="Edit">
+  </form>
+  <form action="/entries/<%=#{entry.id}%>/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
+
+    </div>
+
 <% end %>

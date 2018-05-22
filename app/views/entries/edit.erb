@@ -1,0 +1,19 @@
+<form action="/entries" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label>How's your physical state in words?</label>
+  <input type="text" name="content_physical" value= <%=@entry.content_physical %>>
+  <label>How about in a number from 1-10?</label>
+  <input type="integer" name="rating_physical" value= <%=@entry.rating_physical %>>
+  <br><br>
+  <label>How's your emotional state?</label>
+  <input type="text" name="content_emotional" value= <%=@entry.content_emotional %>>
+  <label>1-10?</label>
+  <input type="integer" name="rating_emotional" value= <%=@entry.rating_emotional %>>
+  <br><br>
+  <label>How's your intellectual state?</label>
+  <input type="text" name="content_intellectual" value= <%=@entry.content_intellectual %>>
+  <label>1-10?</label>
+  <input type="integer" name="rating_intellectual" value= <%=@entry.rating_intellectual %>>
+  <br><br>
+  <input type="submit" value="Update Entry">
+</form>
