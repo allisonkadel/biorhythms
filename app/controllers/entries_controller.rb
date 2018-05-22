@@ -14,8 +14,12 @@ class EntriesController < ApplicationController
     erb :'/entries/entries'
   end
 
-  get '/entries/:id/delete' do
-    "deleting entry"
+  delete '/entries/:id/delete' do
+    @entry = Entry.find_by(:id => params[:id])
+    if current_user == @entry.user
+      @entry.delete
+    end
+    redirect '/entries'
   end
 
   get '/entries/:id/edit' do
