@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
 get '/signup' do
-  erb :'users/signup'
+  if logged_in?
+    redirect "/dashboard/#{current_user.slug}"
+  else
+    erb :'users/signup'
+  end
 end
 
 get '/login' do
@@ -9,9 +13,17 @@ get '/login' do
 end
 
 post '/signup' do
-  @user = User.create(params)
-  session[:user_id] = @user.id
-  redirect "/dashboard/#{@user.slug}"
+  invalid = 0
+  params.each do |param|
+    invalid = 1 if param[1] == ""
+  end
+  if invalid == 1
+    redirect '/signup'
+  else
+    @user = User.create(params)
+    session[:user_id] = @user.id
+    redirect "/dashboard/#{@user.slug}"
+  end
 end
 
 post '/login' do
