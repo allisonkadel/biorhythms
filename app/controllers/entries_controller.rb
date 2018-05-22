@@ -34,7 +34,7 @@ class EntriesController < ApplicationController
   patch '/entries/:id/edit' do
     @entry = Entry.find_by(:id => params[:id])
     if @entry.user == current_user
-      @entry.update(params)
+      @entry.update(:content_physical => params[:content_physical], :rating_physical => params[:rating_physical], :content_emotional => params[:content_emotional], :rating_emotional => params[:rating_emotional], :content_intellectual => params[:content_intellectual], :rating_intellectual => params[:rating_intellectual])
       redirect '/entries'
     else
       redirect '/login'
