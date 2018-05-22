@@ -1,3 +1,5 @@
+require 'sinatra/flash'
+
 class UsersController < ApplicationController
 
 get '/signup' do
@@ -18,7 +20,7 @@ end
 
 post '/signup' do
   if User.find_by(:username => params[:username])
-      flash[:notice] = "That username is already in use. Please choose a different one."
+      #flash[:notice] = "That username is already in use. Please choose a different one."
       redirect '/signup'
   end
   invalid = 0

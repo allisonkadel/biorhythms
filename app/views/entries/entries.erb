@@ -2,8 +2,8 @@
 <h4><a href="/dashboard/<%=current_user.slug%>">Back to Dashboard</a></h4>
 <% @entries.each do |entry| %>
 
-  <div> <h4> <%=entry.created_at%> </h4> <%= "Physical: #{entry.rating_physical} - #{entry.content_physical}
-            Emotional: #{entry.rating_emotional} - #{entry.content_emotional}
+  <div> <h4> <%=entry.created_at%> </h4> <%= "Physical: #{entry.rating_physical} - #{entry.content_physical} | \n
+            Emotional: #{entry.rating_emotional} - #{entry.content_emotional} |
             Intellectual: #{entry.rating_intellectual} - #{entry.content_intellectual}" %>
 <p>
   <form action="/entries/<%=entry.id%>/edit" method="get">
