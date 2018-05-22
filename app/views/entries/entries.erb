@@ -1,7 +1,6 @@
-<h3>Here are your entries, friend!</h3>
-
-
+<h2>Here are your entries, friend!</h2>
 <% @entries.each do |entry| %>
+
   <div> <h4> <%=entry.created_at%> </h4> <%= "Physical: #{entry.rating_physical} - #{entry.content_physical}
             Emotional: #{entry.rating_emotional} - #{entry.content_emotional}
             Intellectual: #{entry.rating_intellectual} - #{entry.content_intellectual}" %>
@@ -15,5 +14,3 @@
   </form>
 
     </div>
-
-<% end %>
