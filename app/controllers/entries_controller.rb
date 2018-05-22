@@ -31,27 +31,47 @@ class EntriesController < ApplicationController
   end
 
   delete '/entries/:id/delete' do
-    @entry = Entry.find_by(:id => params[:id])
-    if current_user == @entry.user
-      @entry.delete
+    if logged_in?
+      @entry = Entry.find_by(:id => params[:id])
+      if current_user == @entry.user
+        @entry.delete
+      end
+      redirect '/entries'
+    else
+      redirect '/login'
     end
-    redirect '/entries'
   end
 
   get '/entries/:id/edit' do
-    @entry = Entry.find_by(:id => params[:id])
-    if @entry.user == current_user
-      erb :'entries/edit'
+    if logged_in?
+      @entry = Entry.find_by(:id => params[:id])
+      if @entry.user == current_user
+        erb :'entries/edit'
+      else
+        redirect '/login'
+      end
     else
       redirect '/login'
     end
   end
 
   patch '/entries/:id/edit' do
-    @entry = Entry.find_by(:id => params[:id])
-    if @entry.user == current_user
-      @entry.update(:content_physical => params[:content_physical], :rating_physical => params[:rating_physical], :content_emotional => params[:content_emotional], :rating_emotional => params[:rating_emotional], :content_intellectual => params[:content_intellectual], :rating_intellectual => params[:rating_intellectual])
-      redirect '/entries'
+    if logged_in?
+      invalid = 0
+      params.each do |param|
+        invalid = 1 if param[1] == ""
+      end
+      if invalid == 1
+        redirect "/entries/#{params[:id]}/edit"
+      else
+        @entry = Entry.find_by(:id => params[:id])
+      end
+      if @entry.user == current_user
+        @entry.update(:content_physical => params[:content_physical], :rating_physical => params[:rating_physical], :content_emotional => params[:content_emotional], :rating_emotional => params[:rating_emotional], :content_intellectual => params[:content_intellectual], :rating_intellectual => params[:rating_intellectual])
+        redirect '/entries'
+      else
+        redirect '/login'
+      end
     else
       redirect '/login'
     end
