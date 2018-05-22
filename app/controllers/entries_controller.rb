@@ -1,18 +1,33 @@
 class EntriesController < ApplicationController
 
   get '/entries/new' do
-    if logged_in
-    erb :'/entries/new'
+    if logged_in?
+      erb :'/entries/new'
+    else
+      redirect '/login'
+    end
   end
 
   post '/entries' do
-    current_user.entries.build(params).save
-    redirect '/entries'
+    invalid = 0
+    params.each do |param|
+      invalid = 1 if param[1] == ""
+    end
+    if invalid == 1
+      redirect '/entries/new'
+    else
+      current_user.entries.build(params).save
+      redirect '/entries'
+    end
   end
 
   get '/entries' do
-    @entries = current_user.entries
-    erb :'/entries/entries'
+    if logged_in?
+      @entries = current_user.entries
+      erb :'/entries/entries'
+    else
+      redirect '/login'
+    end
   end
 
   delete '/entries/:id/delete' do
