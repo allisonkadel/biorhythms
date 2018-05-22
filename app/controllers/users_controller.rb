@@ -17,6 +17,10 @@ get '/login' do
 end
 
 post '/signup' do
+  if User.find_by(:username => params[:username])
+      flash[:notice] = "That username is already in use. Please choose a different one."
+      redirect '/signup'
+  end
   invalid = 0
   params.each do |param|
     invalid = 1 if param[1] == ""
