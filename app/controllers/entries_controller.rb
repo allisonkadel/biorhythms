@@ -23,7 +23,23 @@ class EntriesController < ApplicationController
   end
 
   get '/entries/:id/edit' do
-    "editing entry"
+    @entry = Entry.find_by(:id => params[:id])
+    if @entry.user == current_user
+      erb :'entries/edit'
+    else
+      redirect '/login'
+    end
   end
+
+  patch '/entries/:id/edit' do
+    @entry = Entry.find_by(:id => params[:id])
+    if @entry.user == current_user
+      @entry.update(params)
+      redirect '/entries'
+    else
+      redirect '/login'
+    end
+  end
+
 
 end
