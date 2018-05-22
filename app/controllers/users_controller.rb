@@ -46,8 +46,10 @@ get '/dashboard/:slug' do
 end
 
 post '/logout' do
-  session.clear
-  redirect '/'
+  if logged_in?
+    session.clear
+  end
+    redirect '/'
 end
 
 end
