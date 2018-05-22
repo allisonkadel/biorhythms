@@ -9,7 +9,11 @@ get '/signup' do
 end
 
 get '/login' do
-  erb :'users/login'
+  if logged_in?
+    redirct "/dashboard/#{current_user.slug}"
+  else
+    erb :'users/login'
+  end
 end
 
 post '/signup' do
