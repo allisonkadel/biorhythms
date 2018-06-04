@@ -6,6 +6,8 @@ get '/signup' do
   if logged_in?
     redirect "/dashboard/#{current_user.slug}"
   else
+    @session_message = session[:message]
+    session[:message] = ""
     erb :'users/signup'
   end
 end
@@ -14,13 +16,15 @@ get '/login' do
   if logged_in?
     redirct "/dashboard/#{current_user.slug}"
   else
+    @session_message = session[:message]
+    session[:message] = ""
     erb :'users/login'
   end
 end
 
 post '/signup' do
   if User.find_by(:username => params[:username])
-      #flash[:notice] = "That username is already in use. Please choose a different one."
+      session[:message] = "That username is already in use. Please choose a different one."
       redirect '/signup'
   end
   invalid = 0
@@ -28,6 +32,7 @@ post '/signup' do
     invalid = 1 if param[1] == ""
   end
   if invalid == 1
+    session[:message] = "Please fill in a username and password!"
     redirect '/signup'
   else
     @user = User.create(params)
@@ -38,10 +43,11 @@ end
 
 post '/login' do
   @user = User.find_by(:username => params[:username])
-  if @user && user.authenticate(params[:password])
+  if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id
     redirect "/dashboard/#{@user.slug}"
   else
+    session[:message] = "You're not a user, my friend! Please create an account."
     redirect '/login'
   end
 end

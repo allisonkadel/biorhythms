@@ -2,6 +2,8 @@ class EntriesController < ApplicationController
 
   get '/entries/new' do
     if logged_in?
+      @session_message = session[:message]
+      session[:message] = ""
       erb :'/entries/new'
     else
       redirect '/login'
@@ -14,6 +16,7 @@ class EntriesController < ApplicationController
       invalid = 1 if param[1] == ""
     end
     if invalid == 1
+      session[:message] = "You're a complex being. Please fill in all the fields."
       redirect '/entries/new'
     else
       current_user.entries.build(params).save
@@ -24,6 +27,8 @@ class EntriesController < ApplicationController
   get '/entries' do
     if logged_in?
       @entries = current_user.entries
+      @session_message = session[:message]
+      session[:message] = ""
       erb :'/entries/entries'
     else
       redirect '/login'
@@ -46,6 +51,8 @@ class EntriesController < ApplicationController
     if logged_in?
       @entry = Entry.find_by(:id => params[:id])
       if @entry.user == current_user
+        @session_message = session[:message]
+        session[:message] = ""
         erb :'entries/edit'
       else
         redirect '/login'
@@ -62,6 +69,7 @@ class EntriesController < ApplicationController
         invalid = 1 if param[1] == ""
       end
       if invalid == 1
+        session[:message] = "Please fill in all the fields."
         redirect "/entries/#{params[:id]}/edit"
       else
         @entry = Entry.find_by(:id => params[:id])
