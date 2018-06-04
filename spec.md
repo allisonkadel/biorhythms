@@ -14,12 +14,12 @@ Specs:
 -----create :user_id key-value pair in sessions hash when user signs up and store :user_id in sessions hash when user is logged in
 - [X] Ensure that users can't modify content created by other users
 -----logged_in? and current_user methods ensure that the person making requests is the owner of the content requested
-- [ ] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
+- [X] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
 -----get '/entries/new' and post '/entries' creates new entry, get '/entries' reads entry, delete '/etries/:id/delete' deletes specific entry, get '/entries/:id/edit' and patch '/entries/:id/edit' updates entry
 - [X] Include user input validations
 -----redirect to signup if user account is already in use, redirect to create or update forms if any fields are empty
-- [ ] Display validation failures to user with error message (example form URL e.g. /posts/new)
------NEED TO IMPLEMENT FLASH
+- [X] Display validation failures to user with error message (example form URL e.g. /posts/new)
+-----flash messages stored in session hash that appear when field population and user account validations fail
 - [X] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
