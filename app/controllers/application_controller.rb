@@ -43,9 +43,9 @@ class ApplicationController < Sinatra::Base
   end
 
   def fields_are_populated
-    valid = nil
+    valid = true
     params.each do |param|
-      valid = 0 if param[1] == ""
+      valid = false if param[1] == ""
     end
     valid
   end
