@@ -10,6 +10,7 @@ class EntriesController < ApplicationController
   end
 
   post '/entries' do
+    @entry = Entry.find_by(id: [params[:id]])
     if !fields_are_populated
       session[:message] = "You're a complex being. Please fill in all the fields."
       redirect '/entries/new'
