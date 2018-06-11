@@ -63,11 +63,7 @@ class EntriesController < ApplicationController
 
   patch '/entries/:id/edit' do
     if logged_in?
-      invalid = 0
-      params.each do |param|
-        invalid = 1 if param[1] == ""
-      end
-      if invalid == 1
+      if !fields_are_populated
         session[:message] = "Please fill in all the fields."
         redirect "/entries/#{params[:id]}/edit"
       else
