@@ -11,7 +11,7 @@ end
 
 get '/login' do
   if logged_in?
-    redirct "/dashboard/#{current_user.slug}"
+    redirect "/dashboard/#{current_user.slug}"
   else
     session_message
     erb :'users/login'

@@ -22,7 +22,7 @@ class EntriesController < ApplicationController
       session_message
       erb :'/entries/new'
     else
-      current_user.entries.build(params).save 
+      current_user.entries.create(params)
       redirect '/entries'
     end
   end
