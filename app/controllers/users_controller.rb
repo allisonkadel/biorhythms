@@ -23,11 +23,7 @@ post '/signup' do
       session[:message] = "That username is already in use. Please choose a different one."
       redirect '/signup'
   end
-  invalid = 0
-  params.each do |param|
-    invalid = 1 if param[1] == ""
-  end
-  if invalid == 1
+  if !fields_are_populated
     session[:message] = "Please fill in a username and password!"
     redirect '/signup'
   else
@@ -43,7 +39,7 @@ post '/login' do
     session[:user_id] = @user.id
     redirect "/dashboard/#{@user.slug}"
   else
-    if fields_are_populated == 0
+    if !fields_are_populated
       session[:message] = "Please fill in a username and password!"
       redirect '/login'
     else
