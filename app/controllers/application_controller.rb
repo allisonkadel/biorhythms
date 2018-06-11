@@ -25,6 +25,29 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
 
+    def session_message
+      @session_message = session[:message]
+      session[:message] = ""
+    end
+
+    def entry_count
+      if current_user.entries.count == 0
+        "You have no entries, #{current_user.username}."
+      elsif current_user.entries.count == 1
+        "You have one entry, #{current_user.username}."
+      else
+        "Here are your entries, #{current_user.username}!"
+      end
+    end
+
+  end
+
+  def fields_are_populated
+    valid = nil
+    params.each do |param|
+      valid = 0 if param[1] == ""
+    end
+    valid
   end
 
 end
