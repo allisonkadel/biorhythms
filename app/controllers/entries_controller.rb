@@ -3,7 +3,6 @@ class EntriesController < ApplicationController
   get '/entries/new' do
     if logged_in?
       @entry = Entry.new
-      session_message
       erb :'/entries/new'
     else
       redirect '/login'
@@ -11,16 +10,17 @@ class EntriesController < ApplicationController
   end
 
   post '/entries' do
-    @entry = Entry.find_by(id: [params[:id]])
+    @entry = Entry.new(params)
     if !fields_are_populated
       session[:message] = "You're a complex being. Please fill in all the fields."
-      redirect '/entries/new'
+      session_message
+      erb :'/entries/new'
     elsif !params[:rating_emotional].to_i.between?(1,10) || 
           !params[:rating_intellectual].to_i.between?(1,10) ||
           !params[:rating_physical].to_i.between?(1,10)
       session[:message] = "Please fill in a number 1-10 for each of the rating fields."
-      # Next step is to pre-populate fields with existing values
-      redirect '/entries/new'
+      session_message
+      erb :'/entries/new'
     else
       current_user.entries.build(params).save 
       redirect '/entries'
