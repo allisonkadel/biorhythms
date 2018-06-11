@@ -1,13 +1,10 @@
-require 'sinatra/flash'
-
 class UsersController < ApplicationController
 
 get '/signup' do
   if logged_in?
     redirect "/dashboard/#{current_user.slug}"
   else
-    @session_message = session[:message]
-    session[:message] = ""
+    session_message
     erb :'users/signup'
   end
 end
@@ -16,8 +13,7 @@ get '/login' do
   if logged_in?
     redirct "/dashboard/#{current_user.slug}"
   else
-    @session_message = session[:message]
-    session[:message] = ""
+    session_message
     erb :'users/login'
   end
 end
@@ -47,8 +43,13 @@ post '/login' do
     session[:user_id] = @user.id
     redirect "/dashboard/#{@user.slug}"
   else
-    session[:message] = "You're not a user, my friend! Please create an account."
-    redirect '/login'
+    if fields_are_populated == 0
+      session[:message] = "Please fill in a username and password!"
+      redirect '/login'
+    else
+      session[:message] = "You're not a user, my friend! Please create an account."
+      redirect '/signup'
+    end
   end
 end
 
