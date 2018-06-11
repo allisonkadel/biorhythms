@@ -10,7 +10,7 @@ class EntriesController < ApplicationController
   end
 
   post '/entries' do
-    if fields_are_populated == 0
+    if fields_are_populated
       session[:message] = "You're a complex being. Please fill in all the fields."
       redirect '/entries/new'
     elsif !params[:rating_emotional].to_i.between?(1,10) || 
