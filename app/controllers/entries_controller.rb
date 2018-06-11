@@ -2,6 +2,7 @@ class EntriesController < ApplicationController
 
   get '/entries/new' do
     if logged_in?
+      @entry = Entry.new
       session_message
       erb :'/entries/new'
     else
